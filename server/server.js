@@ -18,15 +18,23 @@ const server = http.createServer(app);
 // Socket.IO server
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: [
+      "http://localhost:5173",
+      "https://ping-zone-6527iehdi-ping-zone.vercel.app",
+    ],
     methods: ["GET", "POST", "DELETE"],
+    credentials: true,
   },
 });
 
 // Middleware
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: [
+      "http://localhost:5173",
+      "https://ping-zone-6527iehdi-ping-zone.vercel.app",
+    ],
+    credentials: true,
   })
 );
 

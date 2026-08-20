@@ -20,7 +20,8 @@ const io = new Server(server, {
   cors: {
     origin: [
       "http://localhost:5173",
-      "https://ping-zone-6527iehdi-ping-zone.vercel.app",
+      "https://ping-zone.vercel.app",
+      "https://pingzone-19i0dt4-ping-zone.vercel.app",
     ],
     methods: ["GET", "POST", "DELETE"],
     credentials: true,
@@ -32,7 +33,8 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://ping-zone-6527iehdi-ping-zone.vercel.app",
+      "https://ping-zone.vercel.app",
+      "https://pingzone-19i0dt4-ping-zone.vercel.app",
     ],
     credentials: true,
   })

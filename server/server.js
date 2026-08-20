@@ -12,33 +12,32 @@ const aiRoutes = require("./routes/aiRoutes");
 
 const app = express();
 
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (
+      !origin ||
+      origin === "http://localhost:5173" ||
+      /^https:\/\/.*\.vercel\.app$/.test(origin)
+    ) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+  methods: ["GET", "POST", "DELETE", "PUT", "PATCH", "OPTIONS"],
+};
+
 // HTTP server
 const server = http.createServer(app);
 
 // Socket.IO server
 const io = new Server(server, {
-  cors: {
-    origin: [
-      "http://localhost:5173",
-      "https://ping-zone.vercel.app",
-      "https://pingzone-19i0dt4-ping-zone.vercel.app",
-    ],
-    methods: ["GET", "POST", "DELETE"],
-    credentials: true,
-  },
+  cors: corsOptions,
 });
 
 // Middleware
-app.use(
-  cors({
-    origin: [
-      "http://localhost:5173",
-      "https://ping-zone.vercel.app",
-      "https://pingzone-19i0dt4-ping-zone.vercel.app",
-    ],
-    credentials: true,
-  })
-);
+app.use(cors(corsOptions));
 
 app.use(express.json());
 
